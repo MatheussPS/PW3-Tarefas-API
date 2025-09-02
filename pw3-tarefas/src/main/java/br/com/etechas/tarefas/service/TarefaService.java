@@ -2,6 +2,7 @@
 
 package br.com.etechas.tarefas.service;
 
+import br.com.etechas.tarefas.dto.TarefaRequestDTO;
 import br.com.etechas.tarefas.dto.TarefaResponseDTO;
 import br.com.etechas.tarefas.entity.Tarefa;
 import br.com.etechas.tarefas.enums.StatusEnum;
@@ -38,6 +39,25 @@ public class TarefaService {
             return true;
         }
         throw new RuntimeException("Tarefa não está pendente");
+    }
+
+    public Tarefa editTarefa(Long id, TarefaResponseDTO model) {
+        Tarefa tarefa = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Tarefa não encontrada com ID: " + id));
+
+        tarefa.setTitulo(model.titulo());
+        tarefa.setDataLimite(model.dataLimite());
+        tarefa.setStatus(model.status());
+        tarefa.setResponsavel(model.responsavel());
+
+        return repository.save(tarefa);
+    }
+
+    public Tarefa createTarefa(TarefaResponseDTO model) {
+
+        Tarefa tarefa = tarefaMapper.toResponseTarefa(model);
+        
+        return repository.save(tarefa);
     }
 
 

@@ -10,6 +10,10 @@ import java.util.List;
 public interface TarefaMapper {
 
     TarefaMapper INSTANCE = Mappers.getMapper(TarefaMapper.class);
+    TarefaResponseDTO toResponseDTO(Tarefa tarefa);
 
     List<TarefaResponseDTO> toResponseDTOList(List<Tarefa> tarefa);
+
+    Tarefa toResponseTarefa(TarefaResponseDTO tarefa);
+
 }

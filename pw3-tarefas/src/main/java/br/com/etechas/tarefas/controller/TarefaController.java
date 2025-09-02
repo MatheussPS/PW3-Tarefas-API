@@ -1,6 +1,7 @@
 //Dupla: Matheus Pinter e Paulo Sergio
 package br.com.etechas.tarefas.controller;
 
+import br.com.etechas.tarefas.dto.TarefaRequestDTO;
 import br.com.etechas.tarefas.dto.TarefaResponseDTO;
 import br.com.etechas.tarefas.entity.Tarefa;
 import br.com.etechas.tarefas.service.TarefaService;
@@ -30,5 +31,15 @@ public class TarefaController {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Tarefa deletada");
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não encontrado");
+    }
+
+    @PutMapping("atualizar/{id}")
+    public ResponseEntity<Tarefa> atualizarPorId(@PathVariable Long id, @RequestBody TarefaResponseDTO model){
+        return ResponseEntity.status(HttpStatus.OK).body(service.editTarefa(id, model));
+    }
+
+    @PostMapping("/criar")
+    public ResponseEntity<Tarefa> criarTarefa(@RequestBody TarefaResponseDTO model){
+        return ResponseEntity.status(HttpStatus.OK).body(service.createTarefa(model));
     }
 }
