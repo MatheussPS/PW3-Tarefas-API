@@ -60,7 +60,9 @@ public class ScheduledTask {
 
         task.setDataLimite(LocalDate.now().plusDays(1 + random.nextInt(10)));
 
-        task.setStatus(StatusEnum.PENDING); // CORREÇÃO AQUI
+//        task.setStatus(StatusEnum.PENDING); // CORREÇÃO AQUI
+        StatusEnum[] statusValues = StatusEnum.values();
+        task.setStatus(statusValues[random.nextInt(statusValues.length)]);
 
         task.setResponsavel(RESPONSIBLES[random.nextInt(RESPONSIBLES.length)]);
 
